@@ -1,0 +1,33 @@
+/*
+ * Copyright 2005 Pi4 Technologies Ltd
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ *
+ * Change History:
+ * Jul 5, 2005 : Initial version created by gary
+ */
+package org.scribble.editor.trace;
+
+/**
+ * This interface contains general definitions used within the
+ * designer.
+ */
+public class DesignerDefinitions {
+
+    public static final String DESIGNER_PLUGIN_ID=
+    			org.scribble.editor.trace.osgi.Activator.PLUGIN_ID;
+
+	public static final String SCENARIO_FILE_EXTENSION="scn";
+
+}
