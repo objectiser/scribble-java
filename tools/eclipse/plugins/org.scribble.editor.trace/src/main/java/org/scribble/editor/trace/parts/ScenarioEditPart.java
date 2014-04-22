@@ -40,7 +40,7 @@ import org.scribble.editor.trace.view.ViewSupport;
  * This edit part represents the complete choreography description.
  */
 public class ScenarioEditPart extends ScenarioBaseEditPart
-			implements ScenarioDiagram {
+			implements TraceDiagram {
 
     /**
      * Creates a new WorkflowEditPart instance.
@@ -56,7 +56,7 @@ public class ScenarioEditPart extends ScenarioBaseEditPart
      * 
      * @return The scenario diagram
      */
-    public ScenarioDiagram getScenarioDiagram() {
+    public TraceDiagram getScenarioDiagram() {
     	return(this);
     }
     

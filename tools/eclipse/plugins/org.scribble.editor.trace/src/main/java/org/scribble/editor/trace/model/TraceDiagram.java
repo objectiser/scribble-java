@@ -23,7 +23,7 @@ import org.eclipse.draw2d.geometry.Point;
 import org.scribble.editor.trace.parts.ScenarioBaseEditPart;
 
 
-public interface ScenarioDiagram {
+public interface TraceDiagram {
 
 	public int getHeight();
 	

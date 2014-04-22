@@ -25,9 +25,8 @@ import javax.xml.namespace.QName;
 
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.ui.views.properties.IPropertySource;
-import org.savara.scenario.model.*;
 import org.scribble.editor.trace.model.ModelSupport;
-import org.scribble.editor.trace.model.ScenarioDiagram;
+import org.scribble.editor.trace.model.TraceDiagram;
 
 public class ViewSupport {
 	
@@ -46,11 +45,7 @@ public class ViewSupport {
 	public static IPropertySource getPropertySource(Object model) {
 		IPropertySource ret=null;
 		
-		if (model instanceof Group) {
-			ret = new GroupPropertySource((Group)model);
-		} else if (model instanceof Import) {
-			ret = new ImportPropertySource((Import)model);
-		} else if (model instanceof Link) {
+		if (model instanceof Link) {
 			ret = new LinkPropertySource((Link)model);
 		} else if (model instanceof MessageEvent) {
 			ret = new MessageEventPropertySource((MessageEvent)model);
@@ -58,8 +53,6 @@ public class ViewSupport {
 			ret = new RolePropertySource((Role)model);
 		} else if (model instanceof Scenario) {
 			ret = new ScenarioPropertySource((Scenario)model);
-		} else if (model instanceof TimeElapsedEvent) {
-			ret = new TimeElapsedEventPropertySource((TimeElapsedEvent)model);
 		}
 		
 		return(ret);
@@ -72,7 +65,7 @@ public class ViewSupport {
 	 * @param component The scenario component
 	 * @return The image
 	 */
-	public static Image getImage(Object component, ScenarioDiagram diagram) {
+	public static Image getImage(Object component, TraceDiagram diagram) {
 		Image ret=null;
 		
 		String imageName=component.getClass().getName();
@@ -95,13 +88,10 @@ public class ViewSupport {
 		return(ret);
 	}
 	
-	public static String getName(Object component, ScenarioDiagram diagram) {
+	public static String getName(Object component, TraceDiagram diagram) {
 		String ret=null;
 		
-		if (component instanceof Group) {
-			ret = ((Group)component).getName();
-			
-		} else if (component instanceof Role) {
+		if (component instanceof Role) {
 			ret = ((Role)component).getName();
 			
 		} else if (component instanceof Link) {			
@@ -199,7 +189,7 @@ public class ViewSupport {
 		}
 	}
 		
-	public static int getHeight(Object component, ScenarioDiagram diagram) {
+	public static int getHeight(Object component, TraceDiagram diagram) {
 		int ret=0;
 		java.util.List children=ModelSupport.getChildren(component);
 				
@@ -237,7 +227,7 @@ public class ViewSupport {
 		return(ret);
 	}
 	
-	public static int getWidth(Object component, ScenarioDiagram diagram) {
+	public static int getWidth(Object component, TraceDiagram diagram) {
 		int ret=0;
 		
 		if (component instanceof Role) {
@@ -291,7 +281,7 @@ public class ViewSupport {
 	}
 	
 	public static int getChildYPosition(Object parent, Object child,
-						ScenarioDiagram diagram) {
+						TraceDiagram diagram) {
 		int ret=0;
 		
 		if (child instanceof Role) {
@@ -379,7 +369,7 @@ public class ViewSupport {
 	}
 	
 	public static int getChildXPosition(Object parent, Object child,
-					ScenarioDiagram diagram) {
+					TraceDiagram diagram) {
 		int ret=0;
 		
 		if (child instanceof Role) {
@@ -425,7 +415,7 @@ public class ViewSupport {
 	}	
 	
 	public static int getNewParticipantIndex(int x,
-						ScenarioDiagram diagram) {
+						TraceDiagram diagram) {
 		int start=getSidebarWidth(diagram) - ROLE_PADDING_X;
 		int pos=(x - start) / ROLE_PADDING_X;
 		
@@ -433,14 +423,14 @@ public class ViewSupport {
 	}
 	
 	public static int getNearestParticipantIndex(int x,
-						ScenarioDiagram diagram) {
+						TraceDiagram diagram) {
 		int pos=(x - getSidebarWidth(diagram) + (ROLE_PADDING_X/2)) /
 					ROLE_PADDING_X;
 		
 		return(pos);
 	}
 	
-	public static Role getNearestRole(int x, ScenarioDiagram diagram) {
+	public static Role getNearestRole(int x, TraceDiagram diagram) {
 		int pos=getNearestParticipantIndex(x, diagram);
 		Role ret=null;
 		
@@ -490,7 +480,7 @@ public class ViewSupport {
 	 * @param diagram The diagram
 	 * @return The width
 	 */
-	public static int getSidebarWidth(ScenarioDiagram diagram) {
+	public static int getSidebarWidth(TraceDiagram diagram) {
 		// This can become dynamic, if necessary, based on the
 		// depth of the event groups
 		return(100);

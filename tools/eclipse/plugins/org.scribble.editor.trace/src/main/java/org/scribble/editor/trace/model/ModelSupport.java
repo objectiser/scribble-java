@@ -21,6 +21,10 @@ package org.scribble.editor.trace.model;
 
 import java.util.logging.Logger;
 
+import org.scribble.trace.model.MessageTransfer;
+import org.scribble.trace.model.Step;
+import org.scribble.trace.model.Trace;
+
 public class ModelSupport {
 	
 	private static Logger logger = Logger.getLogger(ModelSupport.class.getName());
@@ -29,83 +33,50 @@ public class ModelSupport {
 		boolean ret=(component1 == component2);
 		
 		if (!ret) {
-			if (component1 instanceof MessageTransfer && component2 instanceof MessageTransfer) {
-				ret = ((Event)component1).getId().equals(((Event)component2).getId());
-			} else if (component1 instanceof Role && component2 instanceof Role) {
-				ret = ((Role)component1).getId().equals(((Role)component2).getId());
+			if (component1 instanceof Role && component2 instanceof Role) {
+				ret = ((Role)component1).getName().equals(((Role)component2).getName());
 			}
 		}
 		
 		return(ret);
 	}
 	
-	public static java.util.List<Event> getChildren(Object component) {
-		java.util.List<Event> ret=null;
+	public static java.util.List<?> getChildren(Object component) {
+		java.util.List<?> ret=null;
 		
-		if (component instanceof Scenario) {
-			ret = ((Scenario)component).getEvent();
-		} else if (component instanceof Group) {
-			ret = ((Group)component).getEvent();
+		if (component instanceof Trace) {
+			ret = ((Trace)component).getSteps();
 		}
 		
 		return(ret);
 	}
 	
-	public static void getEventsForRole(Role role, java.util.List<Event> events,
-							java.util.List<Event> results) {
-		for (Event event : events) {
-			if (event instanceof Group) {
-				getEventsForRole(role, ((Group)event).getEvent(), results);
-			} else if (event instanceof RoleEvent &&
-					((RoleEvent)event).getRole() == role) {
-				results.add(event);
+	public static void getStepsForRole(Role role, java.util.List<Step> steps,
+							java.util.List<Step> results) {
+		
+		if (role == null || role.getName() == null) {
+			return;
+		}
+		
+		for (Step step : steps) {
+			if (step instanceof MessageTransfer &&
+					(role.getName().equals(((MessageTransfer)step).getFromRole())
+					|| ((MessageTransfer)step).getToRoles().contains(role.getName()))) {
+				results.add(step);
 			}
 		}
 	}
 	
-	public static Object getParent(Scenario scenario, Object component) {
-		Object ret=null;
-		
-		// Need to scan the scenario as the components don't have reference to their parents
-		if (component instanceof Event) {
-			ret = getParentFromEventList(scenario, scenario.getEvent(), component);
-		} else if (component instanceof Link) {
-			if (scenario.getLink().contains(component)) {
-				ret = scenario;
-			}
-		} else if (component instanceof Role) {
-			if (scenario.getRole().contains(component)) {
-				ret = scenario;
-			}
-		}
-		
-		return(ret);
-	}
-	
-	protected static Object getParentFromEventList(Object parent, java.util.List<Event> events,
-								Object component) {
-		Object ret=null;
-		
-		if (events.contains(component)) {
-			ret = parent;
-		} else {
-			for (int i=0; ret == null && i < events.size(); i++) {
-				Event evt=events.get(i);
-				
-				if (evt instanceof Group) {
-					ret = getParentFromEventList(evt, ((Group)evt).getEvent(), component);
-				}
-			}
-		}
-		
-		return(ret);
+	public static Object getParent(Trace trace, Object component) {
+		// No groups supported currently
+		return (trace);
 	}
 	
 	public static int getChildIndex(Object parent, Object child) {
 		int ret=0;
 		
 		if (child instanceof Role) {
-			if (parent instanceof Scenario) {
+			if (parent instanceof Trace) {
 				ret = ((Scenario)parent).getRole().indexOf(child);
 			} else {
 				logger.warning("Invalid parent ("+parent+") for child of type 'Role'");

@@ -30,7 +30,7 @@ import org.eclipse.gef.EditPolicy;
 import org.eclipse.gef.editparts.AbstractConnectionEditPart;
 import org.eclipse.ui.views.properties.IPropertySource;
 import org.savara.scenario.model.*;
-import org.scribble.editor.trace.model.ScenarioDiagram;
+import org.scribble.editor.trace.model.TraceDiagram;
 import org.scribble.editor.trace.policies.LinkComponentEditPolicy;
 import org.scribble.editor.trace.policies.LinkConnectionEditPolicy;
 import org.scribble.editor.trace.policies.LinkEndpointEditPolicy;
@@ -60,8 +60,8 @@ public class LinkEditPart
      * 
      * @return The scenario diagram
      */
-    public ScenarioDiagram getScenarioDiagram() {
-    	ScenarioDiagram ret=null;
+    public TraceDiagram getScenarioDiagram() {
+    	TraceDiagram ret=null;
     	
     	if (getParent() != null) {
     		java.util.List children=getParent().getChildren();

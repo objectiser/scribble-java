@@ -19,12 +19,11 @@
  */
 package org.scribble.editor.trace.model;
 
-import java.util.UUID;
 import java.util.logging.Logger;
 
 import org.eclipse.gef.requests.CreationFactory;
 
-import org.scribble.trace.model.MessageTransfer;
+//import org.scribble.trace.model.MessageTransfer;
 
 /**
  * This class is responsible for creating new instances of the
@@ -49,11 +48,13 @@ public class ModelCreationFactory implements CreationFactory {
 		try {
 			ret = m_targetClass.newInstance();
 			
+			/*
 			if (ret instanceof MessageTransfer) {
 				((MessageTransfer)ret).setId(UUID.randomUUID().toString());
 			} else if (ret instanceof Role) {
 				//((Role)ret).setId(UUID.randomUUID().toString());				
 			}
+			*/
 		} catch(Exception e) {
 			logger.severe("Failed to create new object of type '"+
 					m_targetClass+"': "+e);

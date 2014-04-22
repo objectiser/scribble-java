@@ -26,7 +26,7 @@ import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.gef.GraphicalEditPart;
 import org.eclipse.gef.editparts.AbstractGraphicalEditPart;
 import org.eclipse.ui.views.properties.IPropertySource;
-import org.scribble.editor.trace.model.ScenarioDiagram;
+import org.scribble.editor.trace.model.TraceDiagram;
 import org.scribble.editor.trace.view.GraphicalComponent;
 
 /**
@@ -53,8 +53,8 @@ public abstract class ScenarioBaseEditPart extends AbstractGraphicalEditPart
      * 
      * @return The scenario diagram
      */
-    public ScenarioDiagram getScenarioDiagram() {
-    	ScenarioDiagram ret=null;
+    public TraceDiagram getScenarioDiagram() {
+    	TraceDiagram ret=null;
     	
     	if (getParent() instanceof ScenarioBaseEditPart) {
     		ret = ((ScenarioBaseEditPart)getParent()).getScenarioDiagram();

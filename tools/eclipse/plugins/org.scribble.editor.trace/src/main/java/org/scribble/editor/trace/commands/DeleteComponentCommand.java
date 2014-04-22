@@ -77,7 +77,7 @@ public class DeleteComponentCommand
 			
 			java.util.List<Event> results=new java.util.Vector<Event>();
 			
-			ModelSupport.getEventsForRole((Role)m_child, m_scenario.getEvent(), results);
+			ModelSupport.getStepsForRole((Role)m_child, m_scenario.getEvent(), results);
 			
 			for (int i=results.size()-1; i >= 0; i--) {
 				Event event=results.get(i);
