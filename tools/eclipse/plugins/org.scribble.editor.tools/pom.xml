@@ -98,7 +98,7 @@
 								</artifactItem>
 								<artifactItem>
 									<groupId>org.antlr</groupId>
-									<artifactId>antlr-runtime</artifactId>
+									<artifactId>antlr4-runtime</artifactId>
 									<version>${antlr.version}</version>
 								</artifactItem>
 								<artifactItem>
