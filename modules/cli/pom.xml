@@ -7,22 +7,27 @@
 
 	<parent>
 		<groupId>org.scribble</groupId>
-		<artifactId>modules</artifactId>
+		<artifactId>parent</artifactId>
 		<version>0.3.2-SNAPSHOT</version>
+		<relativePath>../../pom.xml</relativePath>
 	</parent>
 
 	<dependencies>
 		<dependency>
 			<groupId>org.scribble</groupId>
 			<artifactId>scribble-core</artifactId>
-			<version>${project.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.scribble</groupId>
 			<artifactId>scribble-parser</artifactId>
-			<version>${project.version}</version>
 		</dependency>
 		
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<scope>provided</scope>
+		</dependency>
+
 		<dependency>
 			<groupId>org.codehaus.jackson</groupId>
 			<artifactId>jackson-core-asl</artifactId>
