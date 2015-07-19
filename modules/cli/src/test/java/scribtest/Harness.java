@@ -27,14 +27,14 @@ public class Harness {
 		//java.appendClasspath("lib/antlr-3.5.2-complete.jar");
 		//java.appendClasspath("bin/");
 		java.appendClasspath("target/classes/");
-		java.appendClasspath("../core/target/classes/");
-		java.appendClasspath("../trace/target/classes/");
-		java.appendClasspath("../parser/target/classes/");
 		java.appendClasspath("c:/Users/Raymond/.m2/repository/org/antlr/antlr-runtime/3.2/antlr-runtime-3.2.jar/");
-		java.appendClasspath("../validation/target/classes/");
+		java.appendClasspath("../core/target/classes/");
+		java.appendClasspath("../parser/target/classes/");
+		/*java.appendClasspath("../validation/target/classes/");
 		java.appendClasspath("../projection/target/classes/");
-		java.appendClasspath("C:/Users/Raymond/.m2/repository/org/codehaus/jackson/jackson-mapper-asl/1.9.9/jackson-mapper-asl-1.9.9.jar/");
-		java.appendClasspath("C:/Users/Raymond/.m2/repository/org/codehaus/jackson/jackson-core-asl/1.9.9/jackson-core-asl-1.9.9.jar/");
+		java.appendClasspath("../trace/target/classes/");*/
+		/*java.appendClasspath("C:/Users/Raymond/.m2/repository/org/codehaus/jackson/jackson-mapper-asl/1.9.9/jackson-mapper-asl-1.9.9.jar/");
+		java.appendClasspath("C:/Users/Raymond/.m2/repository/org/codehaus/jackson/jackson-core-asl/1.9.9/jackson-core-asl-1.9.9.jar/");*/
 		//java.appendClasspath("org.scribble2.cli.CommandLine -path modules/validation/src/test/scrib/src modules/validation/src/test/scrib/src/Test.scr/");
 
 		return java;
@@ -63,12 +63,16 @@ public class Harness {
 	    return result;
 	}
 
+	public Collection<String> getExamples(String path) {
+		return getScribbleFiles(path);
+	}
+
 	public Collection<String> getGoodExamples() {
-		return getScribbleFiles(GOOD_EXAMPLES_DIR);
+		return getExamples(GOOD_EXAMPLES_DIR);
 	}
 
 	public Collection<String> getBadExamples() {
-		return getScribbleFiles(BAD_EXAMPLES_DIR);
+		return getExamples(BAD_EXAMPLES_DIR);
 	}
 	
 	public Collection<Object[]> getAllExamples() {
