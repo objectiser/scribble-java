@@ -2,12 +2,14 @@ package scribtest;
 
 import static org.junit.Assert.fail;
 
+import java.net.URL;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+
 
 
 
@@ -46,16 +48,30 @@ public class TestWellFormedness {
 	@Parameters(name = "{0} bad={1}")
 	public static Collection<Object[]> data() {
 		Harness harness = new Harness();
-		return harness.getAllExamples();
+		List<Object[]> result = new ArrayList<>();
+
+		URL url=ClassLoader.getSystemResource("good");
+		String dir = url.getFile();
+		
+		for (String file : harness.getExamples(dir))
+		{
+			result.add(new Object[] { file, false });
+		}
+
+		url=ClassLoader.getSystemResource("bad");
+		dir = url.getFile();
+		
+		for (String file : harness.getExamples(dir))
+		{
+			result.add(new Object[] { file, true });
+		}
+
+		return result;
 	}
 
 	@Test
 	public void tests() throws Exception {
 		try {
-			ArrayList<String> imports = new ArrayList<String>();
-			imports.add(hasErrors ? Harness.BAD_EXAMPLES_DIR : Harness.GOOD_EXAMPLES_DIR);
-			//Job.isWellFormed(imports, filename);
-
 			MainContext mc = newMainContext();
 			Job job = new Job(mc.debug, mc.getParsedModules(), mc.main);
 
@@ -73,7 +89,12 @@ public class TestWellFormedness {
 	{
 		boolean debug = false;
 		Path mainpath = Paths.get(filename);
-		List<Path> impaths = Collections.emptyList();
+		List<Path> impaths = new ArrayList<Path>();
+		
+		URL url=ClassLoader.getSystemResource("good");
+		String dir = url.getFile().substring(0, url.getFile().length()-5);
+		impaths.add(Paths.get(dir));
+		
 		ResourceLocator locator = new DirectoryResourceLocator(impaths);
 		return new MainContext(debug, locator, mainpath);
 	}

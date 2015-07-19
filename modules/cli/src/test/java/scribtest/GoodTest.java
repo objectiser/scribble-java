@@ -25,7 +25,7 @@ public class GoodTest extends AllTest
 		List<Object[]> result = new ArrayList<>();
 		Harness harness = new Harness();
 
-		URL url=ClassLoader.getSystemResource("examples");
+		URL url=ClassLoader.getSystemResource("good");
 		String dir = url.getFile();
 		
 		for (String file : harness.getExamples(dir))
